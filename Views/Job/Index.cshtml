@@ -1,0 +1,43 @@
+@model IEnumerable<JobPortal.Models.JobListing>
+
+@{
+    ViewData["Title"] = "Job Listings";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1>@ViewData["Title"]</h1>
+            <p class="lead">Find your dream job from our listings below</p>
+        </div>
+        <div class="col-md-4 text-right align-self-center">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Post a New Job
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.Any())
+        {
+            <div class="col-12">
+                <div class="row">
+                    @foreach (var job in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <partial name="_JobCard" model="job" />
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <h3>No job listings available</h3>
+                <p>Be the first to post a job listing!</p>
+                <a asp-action="Create" class="btn btn-lg btn-outline-primary mt-3">Post a Job</a>
+            </div>
+        }
+    </div>
+</div>

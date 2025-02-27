@@ -1,0 +1,25 @@
+@model JobPortal.Models.JobListing
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.CompanyName</h6>
+        
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span><i class="bi bi-geo-alt"></i> @(string.IsNullOrEmpty(Model.Location) ? "Location not specified" : Model.Location)</span>
+            <span class="badge badge-primary">@Model.JobType</span>
+        </div>
+        
+        <p class="card-text text-muted small">
+            <i class="bi bi-clock"></i> Posted: @Model.PostedDate.ToString("MMMM dd, yyyy")
+        </p>
+        
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-outline-danger float-right" 
+                    onclick="return confirm('Are you sure you want to delete this job listing?');">
+                <i class="bi bi-trash"></i> Delete
+            </button>
+        </form>
+    </div>
+</div>
